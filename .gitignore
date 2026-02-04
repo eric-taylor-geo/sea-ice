@@ -1,6 +1,26 @@
-/data/
+# ======================
+# Python build artifacts
+# ======================
+*.egg-info/
+dist/
+build/
+
+# ======================
+# Bytecode / cache
+# ======================
+__pycache__/
+*.py[cod]
+
+# ======================
+# Data (never commit)
+# ======================
+data/
+seaice_data/
 *.nc
+weights/
+
+# ======================
+# OS / editor junk
+# ======================
 .DS_Store
 .vscode/
-__pycache__/
-weights/
