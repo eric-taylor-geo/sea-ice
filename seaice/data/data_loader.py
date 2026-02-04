@@ -13,8 +13,8 @@ def create_data_loader(
     num_workers: int = 0,
 ):
 
-    ice_train = TensorDataset(torch.Tensor(X_train), torch.Tensor(y_train / 10))
-    ice_test = TensorDataset(torch.Tensor(X_test), torch.Tensor(y_test / 10))
+    ice_train = TensorDataset(torch.Tensor(X_train), torch.Tensor(y_train))
+    ice_test = TensorDataset(torch.Tensor(X_test), torch.Tensor(y_test))
     train_loader = DataLoader(ice_train, batch_size=batch_size, shuffle=shuffle, num_workers=num_workers)
     test_loader = DataLoader(ice_test, batch_size=batch_size, shuffle=shuffle, num_workers=num_workers)
 
