@@ -53,3 +53,5 @@ def predict_sliding_window(
     pred_mask = np.zeros_like(pred_sum)
     valid = pred_wsum > 0
     pred_mask[valid] = pred_sum[valid] / pred_wsum[valid]
+
+    return pred_mask
