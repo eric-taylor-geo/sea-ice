@@ -1,4 +1,8 @@
+# Sea Ice Concentration Prediction
+
 ![SeaIce](images/readme.png)
+
+Deep learning for predicting sea ice concentration from SAR imagery provided in the AI4Arctic Sea Ice Challenge Dataset (Buus-Hinkler et al., 2022).
 
 ## Installation Instructions
 
@@ -21,3 +25,11 @@
 5. seaice is now installed and can be used in your mcsim conda environment using:
 
   `import seaice`
+
+  ## Example usage
+
+  Example usage of training and prediction is provided in `demo.ipynb`.
+
+  Weights and data are available at [ TBC ].
+
+  Original data from Buus-Hinkler et al. (2022).
