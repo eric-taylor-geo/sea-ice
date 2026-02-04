@@ -326,4 +326,4 @@ def get_train_test_arrays(
         seed=test_seed,
     )
 
-    return X_train, y_train, X_test, y_test
+    return X_train, y_train / 10, X_test, y_test / 10
