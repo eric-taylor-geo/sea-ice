@@ -22,7 +22,7 @@ Deep learning for predicting sea ice concentration from SAR imagery provided in 
 
   `pip install .`
 
-5. seaice is now installed and can be used in your mcsim conda environment using:
+5. seaice is now installed and can be used in your seaice conda environment using:
 
   `import seaice`
 
