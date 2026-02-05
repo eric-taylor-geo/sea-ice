@@ -85,6 +85,15 @@ def plot_prediction(
 
     # remove space between columns
     plt.subplots_adjust(wspace=0.02)
-    
-    plt.tight_layout()
+
+    # add colorbar for Y_true and Y_pred at the bottom
+    cbar_ax = fig.add_axes([0.25, 0.05, 0.5, 0.02])
+    sm = plt.cm.ScalarMappable(
+        cmap="Blues", norm=plt.Normalize(vmin=0, vmax=20)
+    )
+    sm._A = []  # dummy array for the scalar mappable
+    cbar = plt.colorbar(sm, cax=cbar_ax, orientation='horizontal')
+    cbar.set_label("Sea Ice Concentration (%)")
+
+    # plt.tight_layout()
     plt.show()
