@@ -1,8 +1,6 @@
-import torch
-import torch.nn as nn
 from livelossplot import PlotLosses
 
-from .loops import train_one_epoch, test_one_epoch
+from .loops import test_one_epoch, train_one_epoch
 
 
 def run_epochs(

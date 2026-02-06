@@ -1,7 +1,8 @@
-import matplotlib.pyplot as plt
-from matplotlib import gridspec
-import numpy as np
 from typing import Tuple
+
+import matplotlib.pyplot as plt
+import numpy as np
+from matplotlib import gridspec
 
 
 def plot_patches(X, Y, dim=10):
@@ -41,9 +42,7 @@ def plot_patches(X, Y, dim=10):
 
     # Add colorbar for Y
     cbar_ax = fig.add_axes([0.92, 0.15, 0.015, 0.7])
-    sm = plt.cm.ScalarMappable(
-        cmap="Blues", norm=plt.Normalize(vmin=0, vmax=50)
-    )
+    sm = plt.cm.ScalarMappable(cmap="Blues", norm=plt.Normalize(vmin=0, vmax=50))
     sm._A = []  # dummy array for the scalar mappable
     cbar = plt.colorbar(sm, cax=cbar_ax)
     cbar.set_label("Sea Ice Concentration (%)")
@@ -52,7 +51,12 @@ def plot_patches(X, Y, dim=10):
 
 
 def plot_prediction(
-    X: np.ndarray, Y_true: np.ndarray, Y_pred: np.ndarray, figsize: Tuple = (12, 10), dpi: int = 300, patch_size: int = 128
+    X: np.ndarray,
+    Y_true: np.ndarray,
+    Y_pred: np.ndarray,
+    figsize: Tuple = (12, 10),
+    dpi: int = 300,
+    patch_size: int = 128,
 ):
     """Plot input X, ground truth Y_true, and prediction Y_pred side by side.
 
@@ -60,7 +64,7 @@ def plot_prediction(
         X: np.ndarray of shape (H, W, 2)
         Y_true: np.ndarray of shape (H, W)
         Y_pred: np.ndarray of shape (H, W)
-    
+
     Returns:
         None
     """
@@ -69,7 +73,16 @@ def plot_prediction(
     axs = axs.flatten()
 
     axs[0].imshow(X[:, :, 0], cmap="RdBu", vmin=-2, vmax=2)
-    axs[0].add_patch(plt.Rectangle((0, 0), patch_size, patch_size, fill=False, edgecolor='yellow', linewidth=1))
+    axs[0].add_patch(
+        plt.Rectangle(
+            (0, 0),
+            patch_size,
+            patch_size,
+            fill=False,
+            edgecolor="yellow",
+            linewidth=1,
+        )
+    )
     axs[0].set_title("Input SAR Primary")
 
     axs[1].imshow(X[:, :, 1], cmap="RdBu", vmin=-2, vmax=2)
@@ -81,18 +94,16 @@ def plot_prediction(
     axs[3].imshow(Y_pred, cmap="Blues", vmin=0, vmax=20)
     axs[3].set_title("Predicted Sea Ice Concentration")
 
-    [ax.axis('off') for ax in axs]
+    [ax.axis("off") for ax in axs]
 
     # remove space between columns
     plt.subplots_adjust(wspace=0.02)
 
     # add colorbar for Y_true and Y_pred at the bottom
     cbar_ax = fig.add_axes([0.25, 0.05, 0.5, 0.02])
-    sm = plt.cm.ScalarMappable(
-        cmap="Blues", norm=plt.Normalize(vmin=0, vmax=20)
-    )
+    sm = plt.cm.ScalarMappable(cmap="Blues", norm=plt.Normalize(vmin=0, vmax=20))
     sm._A = []  # dummy array for the scalar mappable
-    cbar = plt.colorbar(sm, cax=cbar_ax, orientation='horizontal')
+    cbar = plt.colorbar(sm, cax=cbar_ax, orientation="horizontal")
     cbar.set_label("Sea Ice Concentration (%)")
 
     # plt.tight_layout()

@@ -17,9 +17,7 @@ def train(model, optimiser, criterion, data_loader):
         input, target = input.to(device), target.to(device)
         optimiser.zero_grad()
         output = model(input.permute(0, 3, 1, 2))  # change to (B, C, H, W)
-        loss = criterion(
-            output, target.permute(0, 3, 1, 2)
-        )  # change to (B, C, H, W)
+        loss = criterion(output, target.permute(0, 3, 1, 2))  # change to (B, C, H, W)
         loss.backward()
         optimiser.step()
         train_loss += loss.item() * input.size(0)
@@ -63,9 +61,7 @@ class MaskedMSELoss(nn.Module):
         self.eps = eps
         self.reduction = reduction
 
-    def forward(
-        self, preds: torch.Tensor, targets: torch.Tensor
-    ) -> torch.Tensor:
+    def forward(self, preds: torch.Tensor, targets: torch.Tensor) -> torch.Tensor:
         if preds.shape != targets.shape:
             raise ValueError(
                 f"preds and targets must have same shape, got {preds.shape} vs {targets.shape}"

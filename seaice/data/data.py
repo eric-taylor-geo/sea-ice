@@ -67,15 +67,14 @@ def load_scene_datasets(
         if os.path.exists(y_path):
             y_dict[scene_name] = xr.open_dataset(y_path)
         else:
-            print(
-                f"Warning: Y file not found for scene {scene_name}: {y_path}"
-            )
+            print(f"Warning: Y file not found for scene {scene_name}: {y_path}")
 
     # Fail fast if required variables are missing
     for k, ds in x_dict.items():
         if x_var_primary not in ds or x_var_secondary not in ds:
             raise KeyError(
-                f"Scene {k}: expected vars '{x_var_primary}' and '{x_var_secondary}' in X dataset."
+                f"Scene {k}: expected vars '{x_var_primary}'"
+                " and '{x_var_secondary}' in X dataset."
             )
     for k, ds in y_dict.items():
         if y_var not in ds:
@@ -146,9 +145,7 @@ def patchify_scene(
             f"Scene too small for patch_size={patch_size}. Got data shape {data.shape}."
         )
 
-    max_tries = (
-        10_000  # guard against infinite loops if scene is mostly nodata
-    )
+    max_tries = 10_000  # guard against infinite loops if scene is mostly nodata
 
     for n in range(patch_num):
         tries = 0
@@ -156,8 +153,7 @@ def patchify_scene(
             tries += 1
             if tries > max_tries:
                 raise RuntimeError(
-                    f"Exceeded max_tries={max_tries} while sampling patches. "
-                    f"Consider lowering nodata_frac_threshold or patch_size."
+                    f"Exceeded max_tries={max_tries} while sampling patches. Consider lowering nodata_frac_threshold or patch_size."
                 )
 
             x_n = rng.randint(half, x_max - half)
@@ -212,9 +208,7 @@ def build_arrays_from_dicts(
     base_rng = random.Random(seed) if seed is not None else None
 
     for k in keys:
-        scene_seed = (
-            base_rng.randint(0, 2**31 - 1) if base_rng is not None else None
-        )
+        scene_seed = base_rng.randint(0, 2**31 - 1) if base_rng is not None else None
 
         Xp, yp = patchify_scene(
             x_dict[k],

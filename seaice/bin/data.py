@@ -67,9 +67,7 @@ def load_scene_datasets(
         if os.path.exists(y_path):
             y_dict[scene_name] = xr.open_dataset(y_path)
         else:
-            print(
-                f"Warning: Y file not found for scene {scene_name}: {y_path}"
-            )
+            print(f"Warning: Y file not found for scene {scene_name}: {y_path}")
 
     # Fail fast if required variables are missing
     for k, ds in x_dict.items():
@@ -146,9 +144,7 @@ def patchify_scene(
             f"Scene too small for patch_size={patch_size}. Got data shape {data.shape}."
         )
 
-    max_tries = (
-        10_000  # guard against infinite loops if scene is mostly nodata
-    )
+    max_tries = 10_000  # guard against infinite loops if scene is mostly nodata
 
     for n in range(patch_num):
         tries = 0
@@ -212,9 +208,7 @@ def build_arrays_from_dicts(
     base_rng = random.Random(seed) if seed is not None else None
 
     for k in keys:
-        scene_seed = (
-            base_rng.randint(0, 2**31 - 1) if base_rng is not None else None
-        )
+        scene_seed = base_rng.randint(0, 2**31 - 1) if base_rng is not None else None
 
         Xp, yp = patchify_scene(
             x_dict[k],

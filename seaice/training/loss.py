@@ -1,12 +1,15 @@
 import torch
 import torch.nn as nn
 
+
 class MaskedMSELoss(nn.Module):
     """
-    Mask out invalid target pixels (e.g., land encoded as 25.5) per item in batch.
+    Mask out invalid target pixels (e.g., land encoded as 25.5) per item
+    in batch.
 
     Assumes:
-      preds, targets shape: (B, C, H, W)  (works for any shape as long as broadcast matches)
+      preds, targets shape: (B, C, H, W)  (works for any shape as long as
+      broadcast matches)
       valid pixels: targets <= 1
       invalid pixels: targets > 1
     """
@@ -18,12 +21,10 @@ class MaskedMSELoss(nn.Module):
         self.eps = eps
         self.reduction = reduction
 
-    def forward(
-        self, preds: torch.Tensor, targets: torch.Tensor
-    ) -> torch.Tensor:
+    def forward(self, preds: torch.Tensor, targets: torch.Tensor) -> torch.Tensor:
         if preds.shape != targets.shape:
             raise ValueError(
-                f"preds and targets must have same shape, got {preds.shape} vs {targets.shape}"
+                "preds and targets must have same shape, got {preds.shape} vs {targets.shape}"
             )
 
         preds = preds.float()
