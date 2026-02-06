@@ -6,9 +6,9 @@ Deep learning for predicting sea ice concentration from SAR imagery provided in 
 
 ## Installation Instructions
 
-1. Create a clean conda environment with Python 3.13:
+1. Create a clean conda environment with Python 3.10:
 
-  `conda create -n seaice python=3.13`
+  `conda create -n seaice python=3.10`
 
 2. Activate your conda environment:
 
@@ -25,6 +25,8 @@ Deep learning for predicting sea ice concentration from SAR imagery provided in 
 5. seaice is now installed and can be used in your seaice conda environment using:
 
   `import seaice`
+
+- [Data](https://drive.google.com/drive/folders/12V9hCvVinGxBBfMi7AGsu-pXXqNbg4b7?usp=drive_link)
 
   ## Example usage
 
