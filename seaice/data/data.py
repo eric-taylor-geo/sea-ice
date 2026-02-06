@@ -33,6 +33,35 @@ class DatasetSplitPaths:
 # =========================
 
 
+def load_x_y(
+    x_path: str,
+    y_path: str,
+    x_var_primary: str = "nersc_sar_primary",
+    x_var_secondary: str = "nersc_sar_secondary",
+    y_var: str = "SIC",
+    y_suffix: str = "_dmi_prep_reference.nc",
+) -> Tuple[np.ndarray, np.ndarray]:
+    if not os.path.exists(x_path):
+        raise FileNotFoundError(f"File not found: {x_path}")
+    if not os.path.exists(y_path):
+        raise FileNotFoundError(f"File not found: {y_path}")
+
+    ds_x = xr.open_dataset(x_path)
+    ds_y = xr.open_dataset(y_path)
+
+    if x_var_primary not in ds_x or x_var_secondary not in ds_x:
+        raise KeyError(
+            f"Expected vars '{x_var_primary}' and '{x_var_secondary}' in X dataset."
+        )
+    if y_var not in ds_y:
+        raise KeyError(f"Expected var '{y_var}' in Y dataset.")
+
+    X = _stack_inputs(ds_x, x_var_primary, x_var_secondary)
+    y = ds_y[y_var].values
+
+    return X, y
+
+
 def load_scene_datasets(
     paths: DataPaths,
     *,

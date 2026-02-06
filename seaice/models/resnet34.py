@@ -1,6 +1,6 @@
+import segmentation_models_pytorch as smp
 import torch
 import torch.nn as nn
-import segmentation_models_pytorch as smp
 
 
 class ResNet34(nn.Module):
@@ -8,6 +8,7 @@ class ResNet34(nn.Module):
     Input:  (B, 2, H, W)
     Output: (B, 1, H, W)
     """
+
     def __init__(self, in_channels: int = 2):
         super().__init__()
         self.net = smp.Unet(
@@ -24,6 +25,7 @@ class ResNet34(nn.Module):
         x = self.out_act(x)
         return x
 
+
 # Helper functions
 
 
@@ -37,7 +39,9 @@ def unfreeze_encoder(model: ResNet34) -> None:
         p.requires_grad = True
 
 
-def make_optimizer(model: ResNet34, lr_decoder: float = 1e-3, lr_encoder: float = 1e-4) -> torch.optim.Optimizer:
+def make_optimizer(
+    model: ResNet34, lr_decoder: float = 1e-3, lr_encoder: float = 1e-4
+) -> torch.optim.Optimizer:
     return torch.optim.AdamW(
         [
             {"params": model.net.decoder.parameters(), "lr": lr_decoder},
