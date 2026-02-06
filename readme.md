@@ -29,8 +29,8 @@ Deep learning for predicting sea ice concentration from SAR imagery provided in 
 - [Data](https://drive.google.com/drive/folders/12V9hCvVinGxBBfMi7AGsu-pXXqNbg4b7?usp=drive_link)
 - [Weights](https://drive.google.com/drive/folders/18tjrRGdmJg_tRkjOmcUJgjFTbY-t8wSX?usp=sharing)
 
-  ## Example usage
+## Example usage
 
-  Example usage of training and prediction is provided in `demo.ipynb`.
+Example usage of training and prediction is provided in `demo.ipynb`.
 
-  Original data from Buus-Hinkler et al. (2022).
+Original data from Buus-Hinkler et al. (2022).
