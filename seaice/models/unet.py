@@ -111,8 +111,8 @@ class UNet(nn.Module):
         output = self.output(d1)
         output = self.output_sig(output)
 
-        # if in eval mode, round to nearest 0.1
-        if not self.training:
-            output = torch.round(output * 10) / 10
+        # # if in eval mode, round to nearest 0.1
+        # if not self.training:
+        #     output = torch.round(output * 10) / 10
 
         return output
