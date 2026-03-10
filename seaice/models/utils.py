@@ -21,8 +21,25 @@ def get_model(name, load_weights=False, path=None):
 
         model = ResNet34(in_channels=2).to(device)
 
+    elif name == "contrastive_encoder":
+
+        from .contrastive import ContrastiveEncoder
+
+        model = ContrastiveEncoder(in_channels=2).to(device)
+
+    elif name == "contrastive_segmentation":
+
+        from .contrastive import ContrastiveEncoder, ContrastiveSegmentationModel
+
+        encoder = ContrastiveEncoder(in_channels=2)
+        model = ContrastiveSegmentationModel(encoder=encoder).to(device)
+
     else:
-        raise ValueError(f"Unknown model name: {name}. Supported: unet, resnet34")
+        raise ValueError(
+            "Unknown model name: "
+            f"{name}. Supported: unet, resnet34, contrastive_encoder, "
+            "contrastive_segmentation"
+        )
 
     if load_weights:
 
